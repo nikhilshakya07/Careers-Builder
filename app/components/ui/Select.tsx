@@ -15,6 +15,8 @@ export interface SelectProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  'aria-label'?: string;
+  id?: string;
 }
 
 export default function Select({
@@ -24,6 +26,8 @@ export default function Select({
   placeholder = 'Select an option',
   className,
   disabled = false,
+  'aria-label': ariaLabel,
+  id,
 }: SelectProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const selectRef = React.useRef<HTMLDivElement>(null);
@@ -98,6 +102,34 @@ export default function Select({
     if (e.key === 'Escape') {
       setIsOpen(false);
       buttonRef.current?.focus();
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const options = selectRef.current?.querySelectorAll('[role="option"]') as NodeListOf<HTMLElement>;
+      if (!options || options.length === 0) return;
+      
+      const currentIndex = Array.from(options).findIndex(
+        (opt) => opt.getAttribute('aria-selected') === 'true'
+      );
+      let nextIndex = currentIndex;
+      
+      if (e.key === 'ArrowDown') {
+        nextIndex = currentIndex < options.length - 1 ? currentIndex + 1 : 0;
+      } else {
+        nextIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+      }
+      
+      options[nextIndex]?.focus();
+      options[nextIndex]?.setAttribute('aria-selected', 'true');
+      if (currentIndex >= 0) {
+        options[currentIndex]?.setAttribute('aria-selected', 'false');
+      }
+    } else if (e.key === 'Enter' && (e.target as HTMLElement).getAttribute('role') === 'option') {
+      const optionValue = (e.target as HTMLElement).getAttribute('data-value');
+      if (optionValue !== null) {
+        onChange(optionValue);
+        setIsOpen(false);
+        buttonRef.current?.focus();
+      }
     }
   };
 
@@ -129,6 +161,7 @@ export default function Select({
       {/* Trigger Button */}
       <button
         ref={buttonRef}
+        id={id}
         type="button"
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
@@ -142,6 +175,8 @@ export default function Select({
         )}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-label={ariaLabel}
+        aria-controls={isOpen ? 'select-dropdown' : undefined}
       >
         <span className={cn('truncate', !selectedOption && 'text-muted-foreground')}>
           {selectedOption ? selectedOption.label : placeholder}
@@ -173,6 +208,7 @@ export default function Select({
           {/* Dropdown Panel */}
           <div
             ref={selectRef}
+            id="select-dropdown"
             className={cn(
               'absolute z-50 w-full rounded-md border border-input bg-background shadow-lg',
               'max-h-[min(300px,calc(100vh-200px))] overflow-auto overscroll-contain',
@@ -186,6 +222,7 @@ export default function Select({
             }}
             onKeyDown={handleKeyDown}
             role="listbox"
+            aria-label={ariaLabel || 'Select an option'}
           >
             <div className="p-1">
               {options.map((option) => {
@@ -194,15 +231,25 @@ export default function Select({
                   <div
                     key={option.value}
                     ref={isSelected ? selectedOptionRef : null}
+                    data-value={option.value}
                     onClick={() => {
                       onChange(option.value);
                       setIsOpen(false);
                       buttonRef.current?.focus();
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onChange(option.value);
+                        setIsOpen(false);
+                        buttonRef.current?.focus();
+                      }
+                    }}
+                    tabIndex={isSelected ? 0 : -1}
                     className={cn(
                       'relative flex w-full cursor-pointer select-none items-center rounded-md px-3 py-2.5 text-sm',
                       'transition-colors',
-                      'focus:bg-accent focus:text-accent-foreground',
+                      'focus:bg-accent focus:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1',
                       'hover:bg-accent hover:text-accent-foreground',
                       isSelected && 'bg-primary text-primary-foreground font-medium'
                     )}

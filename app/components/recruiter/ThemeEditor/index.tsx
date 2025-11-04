@@ -1,10 +1,45 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Theme } from '@/app/lib/types';
 import { Input } from '@/app/components/ui/Input';
 import { Button } from '@/app/components/ui/Button';
 import { Card } from '@/app/components/ui/Card';
+
+interface ColorPickerProps {
+  value: string;
+  onChange: (value: string) => void;
+  defaultColor: string;
+}
+
+function ColorPicker({ value, onChange, defaultColor }: ColorPickerProps) {
+  const colorInputRef = useRef<HTMLInputElement>(null);
+  const displayColor = value || defaultColor;
+
+  return (
+    <div className="relative">
+      <input
+        ref={colorInputRef}
+        type="color"
+        value={displayColor}
+        onChange={(e) => onChange(e.target.value)}
+        className="absolute inset-0 w-12 h-12 opacity-0 cursor-pointer z-10"
+        style={{ 
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+          appearance: 'none',
+        }}
+      />
+      <div
+        className="w-12 h-12 rounded-lg shadow-sm cursor-pointer"
+        style={{ 
+          backgroundColor: displayColor,
+        }}
+        onClick={() => colorInputRef.current?.click()}
+      />
+    </div>
+  );
+}
 
 interface ThemeEditorProps {
   theme: Theme;
@@ -61,15 +96,11 @@ export default function ThemeEditor({ theme, onUpdate, loading = false }: ThemeE
                 <p className="text-xs text-muted-foreground mb-3">{description}</p>
               </div>
               <div className="flex gap-3 items-center">
-                <div className="relative">
-                  <input
-                    type="color"
-                    value={localTheme[key] || defaultColor}
-                    onChange={(e) => handleChange(key, e.target.value)}
-                    className="w-12 h-12 rounded-lg border border-input cursor-pointer"
-                    style={{ backgroundColor: localTheme[key] || defaultColor }}
-                  />
-                </div>
+                <ColorPicker
+                  value={localTheme[key] || ''}
+                  onChange={(value) => handleChange(key, value)}
+                  defaultColor={defaultColor}
+                />
                 <div className="flex-1">
                   <Input
                     value={localTheme[key] || ''}

@@ -51,56 +51,63 @@ export default function JobFilters({
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" role="region" aria-label="Job filters">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-foreground">Filter Jobs</h3>
+        <h3 className="text-sm font-semibold text-foreground" id="filters-heading">Filter Jobs</h3>
         {hasActiveFilters && (
           <button
             onClick={onClearFilters}
-            className="text-sm text-primary hover:underline font-medium"
+            className="text-sm text-primary hover:underline font-medium focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded px-2 py-1"
+            aria-label="Clear all job filters"
           >
             Clear all
           </button>
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" role="group" aria-labelledby="filters-heading">
         {/* Location Filter */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-foreground">
+          <label htmlFor="location-filter" className="block text-sm font-semibold text-foreground">
             Location
           </label>
           <Select
+            id="location-filter"
             options={locationOptions}
             value={selectedLocation}
             onChange={onLocationChange}
             placeholder="Select location"
+            aria-label="Filter jobs by location"
           />
         </div>
 
         {/* Job Type Filter */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-foreground">
+          <label htmlFor="job-type-filter" className="block text-sm font-semibold text-foreground">
             Job Type
           </label>
           <Select
+            id="job-type-filter"
             options={jobTypeOptions}
             value={selectedJobType}
             onChange={onJobTypeChange}
             placeholder="Select job type"
+            aria-label="Filter jobs by type"
           />
         </div>
 
         {/* Department Filter */}
         <div className="space-y-2">
-          <label className="block text-sm font-semibold text-foreground">
+          <label htmlFor="department-filter" className="block text-sm font-semibold text-foreground">
             Department
           </label>
           <Select
+            id="department-filter"
             options={departmentOptions}
             value={selectedDepartment}
             onChange={onDepartmentChange}
             placeholder="Select department"
+            aria-label="Filter jobs by department"
           />
         </div>
       </div>

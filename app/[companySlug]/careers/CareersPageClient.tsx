@@ -73,9 +73,9 @@ export default function CareersPageClient({ company }: CareersPageClientProps) {
       )}
 
       {/* Sections */}
-      <div className="max-w-4xl mx-auto px-6 md:px-8 py-16 md:py-20 space-y-16">
+      <section className="max-w-4xl mx-auto px-6 md:px-8 py-16 md:py-20 space-y-16" aria-label="Company information">
         {visibleSections.map((section) => (
-          <div key={section.id} className="space-y-6">
+          <article key={section.id} className="space-y-6">
             <h2
               className="text-3xl md:text-4xl font-extrabold tracking-tight"
               style={{ color: theme.secondary || '#8b5cf6' }}
@@ -85,20 +85,22 @@ export default function CareersPageClient({ company }: CareersPageClientProps) {
             <div className="prose prose-lg max-w-none text-muted-foreground whitespace-pre-line leading-relaxed">
               {typeof section.content === 'string' ? section.content : JSON.stringify(section.content)}
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
 
       {/* Jobs Section */}
       {allJobs.length > 0 && (
-        <div
+        <section
           className="py-16 md:py-20 px-6"
           style={{ backgroundColor: theme.accent ? `${theme.accent}10` : '#f9fafb' }}
+          aria-label="Job listings"
         >
           <div className="max-w-6xl mx-auto">
             <h2
               className="text-3xl md:text-4xl font-extrabold mb-12 text-center tracking-tight"
               style={{ color: theme.accent || '#10b981' }}
+              id="jobs-heading"
             >
               Open Positions
             </h2>
@@ -124,28 +126,34 @@ export default function CareersPageClient({ company }: CareersPageClientProps) {
 
             {/* Job Listings */}
             {filteredJobs.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                role="list"
+                aria-labelledby="jobs-heading"
+                aria-label={`${filteredJobs.length} job ${filteredJobs.length === 1 ? 'posting' : 'postings'}`}
+              >
                 {filteredJobs.map((job) => (
                   <JobCard key={job.id} job={job} theme={theme} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16">
-                <div className="text-5xl mb-4">🔍</div>
+              <div className="text-center py-16" role="status" aria-live="polite">
+                <div className="text-5xl mb-4" aria-hidden="true">🔍</div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">No jobs found</h3>
                 <p className="text-muted-foreground mb-6">
                   Try adjusting your search or filters to find what you're looking for.
                 </p>
                 <button
                   onClick={handleClearFilters}
-                  className="text-primary hover:underline font-medium"
+                  className="text-primary hover:underline font-medium focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded px-3 py-2"
+                  aria-label="Clear all filters to show all jobs"
                 >
                   Clear all filters
                 </button>
               </div>
             )}
           </div>
-        </div>
+        </section>
       )}
     </div>
   );
