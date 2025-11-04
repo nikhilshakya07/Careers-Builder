@@ -1,0 +1,173 @@
+[
+  {
+    "slug": "acme-corp",
+    "name": "Acme Corporation",
+    "theme": {
+      "primary": "#3b82f6",
+      "secondary": "#8b5cf6",
+      "accent": "#10b981",
+      "logo": "",
+      "banner": "",
+      "video": ""
+    },
+    "sections": [
+      {
+        "id": "1",
+        "type": "about",
+        "title": "About Us",
+        "content": "We are a leading technology company focused on innovation and excellence. Join us in building the future.",
+        "order": 0,
+        "is_visible": true
+      },
+      {
+        "id": "2",
+        "type": "benefits",
+        "title": "Benefits & Perks",
+        "content": "• Competitive salary\n• Health insurance\n• 401k matching\n• Remote work options\n• Professional development",
+        "order": 1,
+        "is_visible": true
+      },
+      {
+        "id": "3",
+        "type": "culture",
+        "title": "Our Culture",
+        "content": "We believe in work-life balance, diversity, and continuous learning.",
+        "order": 2,
+        "is_visible": true
+      }
+    ],
+    "jobs": [
+      {
+        "id": "1",
+        "title": "Senior Software Engineer",
+        "description": "We are looking for an experienced software engineer to join our growing team. You will work on cutting-edge projects and collaborate with talented developers.",
+        "location": "San Francisco, CA",
+        "job_type": "full-time",
+        "department": "Engineering",
+        "requirements": [
+          "5+ years of software development experience",
+          "Strong knowledge of React and Node.js",
+          "Experience with cloud platforms (AWS, GCP)",
+          "Team leadership experience"
+        ],
+        "benefits": [
+          "Health insurance",
+          "401k matching",
+          "Remote work options",
+          "Stock options"
+        ],
+        "is_active": true
+      },
+      {
+        "id": "2",
+        "title": "Product Designer",
+        "description": "Join our design team and help create beautiful, user-friendly products. Work closely with product managers and engineers.",
+        "location": "New York, NY",
+        "job_type": "part-time",
+        "department": "Design",
+        "requirements": [
+          "3+ years of product design experience",
+          "Proficiency in Figma",
+          "Strong portfolio",
+          "UI/UX expertise"
+        ],
+        "benefits": [
+          "Health insurance",
+          "Flexible hours",
+          "Design conference budget"
+        ],
+        "is_active": true
+      },
+      {
+        "id": "3",
+        "title": "Marketing Manager",
+        "description": "Lead our marketing efforts and help grow our brand. Manage campaigns, content, and team.",
+        "location": "Remote",
+        "job_type": "full-time",
+        "department": "Marketing",
+        "requirements": [
+          "5+ years marketing experience",
+          "Digital marketing expertise",
+          "Team management",
+          "Analytics skills"
+        ],
+        "benefits": [
+          "Remote work",
+          "Health insurance",
+          "Unlimited PTO"
+        ],
+        "is_active": true
+      }
+    ]
+  },
+  {
+    "slug": "tech-startup",
+    "name": "Tech Startup Inc",
+    "theme": {
+      "primary": "#ef4444",
+      "secondary": "#f59e0b",
+      "accent": "#06b6d4",
+      "logo": "",
+      "banner": "",
+      "video": ""
+    },
+    "sections": [
+      {
+        "id": "1",
+        "type": "about",
+        "title": "Our Story",
+        "content": "Founded in 2020, we're a fast-growing startup building the next generation of products.",
+        "order": 0,
+        "is_visible": true
+      },
+      {
+        "id": "2",
+        "type": "values",
+        "title": "Our Values",
+        "content": "Innovation, Speed, Customer Focus, and Teamwork.",
+        "order": 1,
+        "is_visible": true
+      }
+    ],
+    "jobs": [
+      {
+        "id": "1",
+        "title": "Frontend Developer",
+        "description": "Build amazing user interfaces using React and TypeScript. Work on exciting projects in a fast-paced environment.",
+        "location": "Remote",
+        "job_type": "full-time",
+        "department": "Engineering",
+        "requirements": [
+          "React and TypeScript experience",
+          "2+ years of frontend development",
+          "Git and version control"
+        ],
+        "benefits": [
+          "Remote work",
+          "Stock options",
+          "Flexible hours"
+        ],
+        "is_active": true
+      },
+      {
+        "id": "2",
+        "title": "Backend Developer",
+        "description": "Build scalable APIs and services. Work with modern technologies and best practices.",
+        "location": "Remote",
+        "job_type": "part-time",
+        "department": "Engineering",
+        "requirements": [
+          "Node.js or Python experience",
+          "Database design",
+          "API development"
+        ],
+        "benefits": [
+          "Remote work",
+          "Stock options"
+        ],
+        "is_active": true
+      }
+    ]
+  }
+]
+
