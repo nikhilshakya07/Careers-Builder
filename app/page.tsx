@@ -48,9 +48,6 @@ export default function Home() {
                   Get Started →
                 </Button>
               </Link>
-              <Button variant="ghost" size="lg">
-                View Demo
-              </Button>
             </div>
           </div>
         </div>
@@ -90,7 +87,7 @@ export default function Home() {
         {/* Footer */}
         <div className="border-t border-border mt-20">
           <div className="max-w-7xl mx-auto px-6 py-8 text-center text-muted-foreground">
-            <p>© 2024 Careers Builder. Built with ❤️ for recruiters.</p>
+            <p>© 2025 Careers Builder. Built with ❤️ by Nikhil.</p>
           </div>
         </div>
       </div>
